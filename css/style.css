@@ -52,16 +52,57 @@
     display: flex;
     justify-content: center;
 }
-
+/*
 #game-board{
     max-height: 70%;
     min-height:70%;
 }
-
+*/
 .tile p{
     z-index: 1;
     position: fixed;
     align-self: center;
     font-size: 200%;
+    font-weight: bold;
+}
+
+#scoreboard{
+    display: flex;
+    flex-direction: column;
+    margin: 3%;
+    background-color: rgb(189, 219, 240);
+    border-radius: 10px;
+}
+
+.stat{
+    display:flex;
+    justify-content: space-between;
+    margin: 2%;
+}
+
+.stat h3{
+    font-weight: normal;
+}
+
+#scoreboard h1{
+    align-self: center;
+    border-bottom: 2px solid rgb(59, 73, 106);
+    padding-left: 5%;
+    padding-right: 5%;
+    font-size: 175%;
+    margin-bottom: 1%;
+}
+
+input{
+    width: 50%;
+    align-self: center;
+    margin: 3%;
+    background-color: rgb(189, 219, 240);
+    border-color: rgb(157, 196, 219);
+    padding: 3%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 90%;
+    border-radius: 10px;
+    color: rgb(59, 73, 106);
     font-weight: bold;
 }
