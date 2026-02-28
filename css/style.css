@@ -17,8 +17,8 @@
     flex-direction: column;
     background-color: rgb(225, 244, 255);
     height: 100vh;
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color:rgb(59, 73, 106);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: rgb(59, 73, 106);
 }
 
 #header {
@@ -30,7 +30,7 @@
     padding-bottom: 5%;
 }
 
-#header h1{
+#header h1 {
     font-size: 225%;
 }
 
@@ -52,13 +52,14 @@
     display: flex;
     justify-content: center;
 }
+
 /*
 #game-board{
     max-height: 70%;
     min-height:70%;
 }
 */
-.tile p{
+.tile p {
     z-index: 1;
     position: fixed;
     align-self: center;
@@ -66,7 +67,7 @@
     font-weight: bold;
 }
 
-#scoreboard{
+#scoreboard {
     display: flex;
     flex-direction: column;
     margin: 3%;
@@ -74,17 +75,17 @@
     border-radius: 10px;
 }
 
-.stat{
-    display:flex;
+.stat {
+    display: flex;
     justify-content: space-between;
     margin: 2%;
 }
 
-.stat h3{
+.stat h3 {
     font-weight: normal;
 }
 
-#scoreboard h1{
+#scoreboard h1 {
     align-self: center;
     border-bottom: 2px solid rgb(59, 73, 106);
     padding-left: 5%;
@@ -93,7 +94,7 @@
     margin-bottom: 1%;
 }
 
-input{
+input {
     width: 50%;
     align-self: center;
     margin: 3%;
