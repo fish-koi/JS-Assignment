@@ -17,6 +17,21 @@ window.addEventListener("load", function () {
         }
 
         computerMove() {
+            let fullSquares = 0;
+            for (let i = 0; i < this.moves.length; i++) {
+                if (this.moves[i] !== "") {
+                    fullSquares++;
+                }
+            }
+
+            if (fullSquares == 9) {
+                this.checkWin();
+                this.gamesPlayed++;
+                scoreGamesPlayed.innerHTML = this.gamesPlayed;
+                gameOver();
+                return;
+            }
+
             if (!xWin && !oWin) {
                 let index = Math.floor(Math.random() * (9))
                 while (this.moves[index] != "") {
@@ -112,20 +127,6 @@ window.addEventListener("load", function () {
                 gameOver();
                 return;
             }
-
-            let fullSquares = 0;
-            for (let i = 0; i < this.moves.length; i++) {
-                if (this.moves[i] !== "") {
-                    fullSquares++;
-                }
-            }
-
-            if (fullSquares == 9) {
-                this.gamesPlayed++;
-                scoreGamesPlayed.innerHTML = this.gamesPlayed;
-                gameOver();
-                return;
-            }
         }
     }
 
@@ -152,12 +153,10 @@ window.addEventListener("load", function () {
             game.checkMoves();
             xWin = false;
             oWin = false;
-            makeNewGame = false;
         }, 3000);
     }
 
     function gameOver() {
-        makeNewGame = true;
         newGame();
     }
 
@@ -173,81 +172,65 @@ window.addEventListener("load", function () {
 
     document.getElementById("r1-c2").addEventListener("click", function () {
         if (!game.yourTurn || xWin || oWin) return;
-        if (game.yourTurn) {
-            game.makeMove(1);
-            r1c2Move.innerHTML = "X";
-            game.yourTurn = false;
-            game.computerMove();
-        }
+        game.makeMove(1);
+        r1c2Move.innerHTML = "X";
+        game.yourTurn = false;
+        game.computerMove();
     });
 
     document.getElementById("r1-c3").addEventListener("click", function () {
         if (!game.yourTurn || xWin || oWin) return;
-        if (game.yourTurn) {
-            game.makeMove(2);
-            r1c3Move.innerHTML = "X";
-            game.yourTurn = false;
-            game.computerMove();
-        }
+        game.makeMove(2);
+        r1c3Move.innerHTML = "X";
+        game.yourTurn = false;
+        game.computerMove();
     });
 
     document.getElementById("r2-c1").addEventListener("click", function () {
         if (!game.yourTurn || xWin || oWin) return;
-        if (game.yourTurn) {
-            game.makeMove(3);
-            r2c1Move.innerHTML = "X";
-            game.yourTurn = false;
-            game.computerMove();
-        }
+        game.makeMove(3);
+        r2c1Move.innerHTML = "X";
+        game.yourTurn = false;
+        game.computerMove();
     });
 
     document.getElementById("r2-c2").addEventListener("click", function () {
         if (!game.yourTurn || xWin || oWin) return;
-        if (game.yourTurn) {
-            game.makeMove(4);
-            r2c2Move.innerHTML = "X";
-            game.yourTurn = false;
-            game.computerMove();
-        }
+        game.makeMove(4);
+        r2c2Move.innerHTML = "X";
+        game.yourTurn = false;
+        game.computerMove();
     });
 
     document.getElementById("r2-c3").addEventListener("click", function () {
         if (!game.yourTurn || xWin || oWin) return;
-        if (game.yourTurn) {
-            game.makeMove(5);
-            r2c3Move.innerHTML = "X";
-            game.yourTurn = false;
-            game.computerMove();
-        }
+        game.makeMove(5);
+        r2c3Move.innerHTML = "X";
+        game.yourTurn = false;
+        game.computerMove();
     });
 
     document.getElementById("r3-c1").addEventListener("click", function () {
         if (!game.yourTurn || xWin || oWin) return;
-        if (game.yourTurn) {
-            game.makeMove(6);
-            r3c1Move.innerHTML = "X";
-            game.yourTurn = false;
-            game.computerMove();
-        }
+        game.makeMove(6);
+        r3c1Move.innerHTML = "X";
+        game.yourTurn = false;
+        game.computerMove();
     });
 
     document.getElementById("r3-c2").addEventListener("click", function () {
         if (!game.yourTurn || xWin || oWin) return;
-        if (game.yourTurn) {
-            game.makeMove(7);
-            r3c2Move.innerHTML = "X";
-            game.yourTurn = false;
-            game.computerMove();
-        }
+        game.makeMove(7);
+        r3c2Move.innerHTML = "X";
+        game.yourTurn = false;
+        game.computerMove();
     });
 
     document.getElementById("r3-c3").addEventListener("click", function () {
         if (!game.yourTurn || xWin || oWin) return;
-        if (game.yourTurn) {
-            game.makeMove(8);
-            r3c3Move.innerHTML = "X";
-            game.yourTurn = false;
-            game.computerMove();
-        }
+        game.makeMove(8);
+        r3c3Move.innerHTML = "X";
+        game.yourTurn = false;
+        game.computerMove();
     });
 });
