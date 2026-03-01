@@ -17,21 +17,6 @@ window.addEventListener("load", function () {
         }
 
         computerMove() {
-            let fullSquares = 0;
-            for (let i = 0; i < this.moves.length; i++) {
-                if (this.moves[i] !== "") {
-                    fullSquares++;
-                }
-            }
-
-            if (fullSquares == 9) {
-                this.checkWin();
-                this.gamesPlayed++;
-                scoreGamesPlayed.innerHTML = this.gamesPlayed;
-                gameOver();
-                return;
-            }
-
             if (!xWin && !oWin) {
                 let index = Math.floor(Math.random() * (9))
                 while (this.moves[index] != "") {
@@ -59,6 +44,7 @@ window.addEventListener("load", function () {
         }
 
         checkWin() {
+            if (xWin || oWin) return;
             //checks all winning conditions for X
             if (this.moves[0] == "X" && this.moves[1] == "X" && this.moves[2] == "X") {
                 xWin = true;
@@ -127,11 +113,27 @@ window.addEventListener("load", function () {
                 gameOver();
                 return;
             }
+
+            let full = true;
+            for (let i = 0; i < this.moves.length; i++) {
+                if (this.moves[i] == "") {
+                    full = false;
+                    break;
+                }
+            }
+
+            if (full) {
+                boardFull = true;
+                this.gamesPlayed++;
+                scoreGamesPlayed.innerHTML = this.gamesPlayed;
+                gameOver();
+            }
         }
     }
 
     let xWin = false;
     let oWin = false;
+    let boardFull = false;
     game = new TicTacToe(["", "", "", "", "", "", "", "", ""], 0, 0, 0, true);
 
     const r1c1Move = document.getElementById("r1-c1-move");
@@ -153,6 +155,7 @@ window.addEventListener("load", function () {
             game.checkMoves();
             xWin = false;
             oWin = false;
+            boardFull = false;
         }, 3000);
     }
 
@@ -166,7 +169,9 @@ window.addEventListener("load", function () {
             game.makeMove(0);
             r1c1Move.innerHTML = "X";
             game.yourTurn = false;
-            game.computerMove();
+            if (!xWin && !oWin && !boardFull) {
+                game.computerMove();
+            }
         }
     });
 
@@ -175,7 +180,9 @@ window.addEventListener("load", function () {
         game.makeMove(1);
         r1c2Move.innerHTML = "X";
         game.yourTurn = false;
-        game.computerMove();
+        if (!xWin && !oWin && !boardFull) {
+            game.computerMove();
+        }
     });
 
     document.getElementById("r1-c3").addEventListener("click", function () {
@@ -183,7 +190,9 @@ window.addEventListener("load", function () {
         game.makeMove(2);
         r1c3Move.innerHTML = "X";
         game.yourTurn = false;
-        game.computerMove();
+        if (!xWin && !oWin && !boardFull) {
+            game.computerMove();
+        }
     });
 
     document.getElementById("r2-c1").addEventListener("click", function () {
@@ -191,7 +200,9 @@ window.addEventListener("load", function () {
         game.makeMove(3);
         r2c1Move.innerHTML = "X";
         game.yourTurn = false;
-        game.computerMove();
+        if (!xWin && !oWin && !boardFull) {
+            game.computerMove();
+        }
     });
 
     document.getElementById("r2-c2").addEventListener("click", function () {
@@ -199,7 +210,9 @@ window.addEventListener("load", function () {
         game.makeMove(4);
         r2c2Move.innerHTML = "X";
         game.yourTurn = false;
-        game.computerMove();
+        if (!xWin && !oWin && !boardFull) {
+            game.computerMove();
+        }
     });
 
     document.getElementById("r2-c3").addEventListener("click", function () {
@@ -207,7 +220,9 @@ window.addEventListener("load", function () {
         game.makeMove(5);
         r2c3Move.innerHTML = "X";
         game.yourTurn = false;
-        game.computerMove();
+        if (!xWin && !oWin && !boardFull) {
+            game.computerMove();
+        }
     });
 
     document.getElementById("r3-c1").addEventListener("click", function () {
@@ -215,7 +230,9 @@ window.addEventListener("load", function () {
         game.makeMove(6);
         r3c1Move.innerHTML = "X";
         game.yourTurn = false;
-        game.computerMove();
+        if (!xWin && !oWin && !boardFull) {
+            game.computerMove();
+        }
     });
 
     document.getElementById("r3-c2").addEventListener("click", function () {
@@ -223,7 +240,9 @@ window.addEventListener("load", function () {
         game.makeMove(7);
         r3c2Move.innerHTML = "X";
         game.yourTurn = false;
-        game.computerMove();
+        if (!xWin && !oWin && !boardFull) {
+            game.computerMove();
+        }
     });
 
     document.getElementById("r3-c3").addEventListener("click", function () {
@@ -231,6 +250,8 @@ window.addEventListener("load", function () {
         game.makeMove(8);
         r3c3Move.innerHTML = "X";
         game.yourTurn = false;
-        game.computerMove();
+        if (!xWin && !oWin && !boardFull) {
+            game.computerMove();
+        }
     });
 });
