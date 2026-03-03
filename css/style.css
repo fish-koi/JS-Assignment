@@ -13,9 +13,10 @@
 #splash-canvas {
     width: 100%;
     height: 100%;
-    background-color: grey;
-    display: none;
+    background-color: rgb(59, 73, 106);
     z-index: 5;
+    position: fixed;
+    visibility: hidden;
 }
 
 #container {
@@ -38,6 +39,9 @@
 
 #header h1 {
     font-size: 225%;
+    border-bottom: 2px solid rgb(59, 73, 106);
+    padding-left: 5%;
+    padding-right: 5%;
 }
 
 #row-1,
@@ -58,13 +62,6 @@
     display: flex;
     justify-content: center;
 }
-
-/*
-#game-board{
-    max-height: 70%;
-    min-height:70%;
-}
-*/
 
 .tile p {
     z-index: 1;
@@ -113,4 +110,57 @@ input {
     border-radius: 10px;
     color: rgb(59, 73, 106);
     font-weight: bold;
+}
+
+#help-div {
+    background-color: rgb(189, 219, 240);
+    z-index: 3;
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 95%;
+    height: 95%;
+    align-self: center;
+    justify-self: center;
+    border-radius: 10px;
+    border-style: solid;
+    border-width: 3px;
+    border-color: rgb(157, 196, 219);
+    display: flex;
+    flex-direction: column;
+    /*visibility: hidden;*/
+}
+
+#help-div h1, h4, p{
+    margin: 0.5%;
+    margin-left: 3%;
+    margin-right: 3%;
+}
+
+#help-div h1{
+    align-self: center;
+    border-bottom: 2px solid rgb(59, 73, 106);
+    padding-left: 5%;
+    padding-right: 5%;
+    margin-bottom: 3%;
+    padding-bottom: 1%;
+    font-size: 200%;
+}
+
+#help-div p{
+    background-color: rgb(225, 244, 255);
+    padding: 3%;
+    border-radius: 10px;
+    font-size: 120%;
+}
+
+#help-div h4{
+    font-size: 130%;
+    margin-bottom: 3%;
+}
+
+#help-div input{
+    background-color: rgb(157, 196, 219);
 }

@@ -61,6 +61,9 @@ window.addEventListener("load", function () {
             for (let i = 0; i < this.moves.length; i++) {
                 squares[i].innerHTML = this.moves[i];
             }
+            scoreGamesPlayed.innerHTML = this.gamesPlayed;
+            scoreGamesWon.innerHTML = this.gamesWon;
+            scoreGamesLost.innerHTML = this.gamesLost;
         }
 
         /**
@@ -164,6 +167,9 @@ window.addEventListener("load", function () {
     const r3c1Move = document.getElementById("r3-c1-move");
     const r3c2Move = document.getElementById("r3-c2-move");
     const r3c3Move = document.getElementById("r3-c3-move");
+    const help = document.getElementById("help");
+    const helpClose = document.getElementById("help-close");
+    const helpDiv = document.getElementById("help-div");
     const scoreGamesPlayed = document.getElementById("games-played");
     const scoreGamesWon = document.getElementById("games-won");
     const scoreGamesLost = document.getElementById("games-lost");
@@ -192,7 +198,8 @@ window.addEventListener("load", function () {
             xWin = false;
             oWin = false;
             boardFull = false;
-        }, 3000);
+            localStorage["save"] = JSON.stringify(game);
+        }, 1500);
     }
 
     /**
@@ -201,6 +208,14 @@ window.addEventListener("load", function () {
     function gameOver() {
         newGame();
     }
+
+    help.addEventListener("click", function(){
+        helpDiv.style.visibility = "visible";
+    });
+
+    helpClose.addEventListener("click", function(){
+        helpDiv.style.visibility = "hidden";
+    });
 
     /**
      * below are event listeners for all the squares in the game board
