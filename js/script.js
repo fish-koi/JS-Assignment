@@ -176,15 +176,15 @@ window.addEventListener("load", function () {
     let xWin = false;
     let oWin = false;
     let boardFull = false;
-    
+
     //getting the game from localStorage if it exists
-    if(localStorage["save"]){
+    if (localStorage["save"]) {
         let saveFile = JSON.parse(localStorage["save"]);
         game = new TicTacToe(saveFile.moves, saveFile.gamesPlayed, saveFile.gamesWon, saveFile.gamesLost, saveFile.yourTurn);
         game.checkMoves();
 
     }
-    else{
+    else {
         game = new TicTacToe(["", "", "", "", "", "", "", "", ""], 0, 0, 0, true);
     }
 
@@ -209,11 +209,11 @@ window.addEventListener("load", function () {
         newGame();
     }
 
-    help.addEventListener("click", function(){
+    help.addEventListener("click", function () {
         helpDiv.style.visibility = "visible";
     });
 
-    helpClose.addEventListener("click", function(){
+    helpClose.addEventListener("click", function () {
         helpDiv.style.visibility = "hidden";
     });
 
@@ -311,4 +311,104 @@ window.addEventListener("load", function () {
             game.computerMove();
         }
     });
+
+    const c = document.getElementById("splash-canvas");
+    const ctx = c.getContext("2d");
+
+    function drawLine(x1, x2, y1, y2) {
+        ctx.strokeStyle = "rgb(157, 196, 219)";
+        ctx.lineWidth = 5;
+        ctx.lineCap = "round";
+
+        ctx.beginPath();
+        ctx.moveTo(x1, y1);
+        ctx.lineTo(x2, y2);
+        ctx.stroke();
+    }
+
+    let verticalY1 = -240;
+    let verticalY2 = 0;
+    let leftHorizontalX1 = -260;
+    let leftHorizontalX2 = 0;
+    let rightHorizontalX1 = 300;
+    let rightHorizontalX2 = 560;
+    let line1Done = false;
+    let line2Done = false;
+    let line3Done = false;
+
+    function incrementLines() {
+        if (verticalY1 <= 30) {
+            verticalY1++;
+            verticalY2++;
+        }
+        else {
+            line1Done = true;
+        }
+
+        if (leftHorizontalX1 <= 20) {
+            leftHorizontalX1++;
+            leftHorizontalX2++;
+        }
+        else {
+            line2Done = true;
+        }
+
+        if (rightHorizontalX1 >= 20) {
+            rightHorizontalX1--;
+            rightHorizontalX2--;
+        }
+        else {
+            line3Done = true;
+        }
+    }
+
+    function update() {
+        ctx.clearRect(0, 0, 300, 600);
+        drawLine(100, 100, verticalY1, verticalY2);
+        drawLine(200, 200, verticalY1, verticalY2);
+        drawLine(leftHorizontalX1, leftHorizontalX2, 100, 100);
+        drawLine(rightHorizontalX1, rightHorizontalX2, 190, 190);
+    }
+
+    function draw() {
+        incrementLines();
+        update();
+        if (line1Done && line2Done && line3Done) {
+            clearInterval(timerId);
+            drawGame();
+        }
+    }
+
+    ctx.font = "bold 90px Arial";
+    ctx.fillStyle = "rgb(157, 196, 219)";
+
+    function drawGame() {
+        if (line1Done && line2Done && line3Done) {
+            ctx.fillText("X", 120, 180);
+            setTimeout(function () {
+                ctx.fillText("O", 20, 270);
+            }, 300);
+            setTimeout(function () {
+                ctx.fillText("X", 30, 90);
+            }, 600);
+            setTimeout(function () {
+                ctx.fillText("O", 115, 270);
+            }, 900);
+            setTimeout(function () {
+                ctx.fillText("X", 210, 270);
+            }, 1200);
+
+            setTimeout(function () {
+                ctx.font = "bold 45px Arial";
+                ctx.fillText("TIC TAC TOE", 10, 400);
+            }, 1500);
+
+            setTimeout(function () {
+                c.style.visibility = "hidden";
+            }, 2300);
+        }
+
+    }
+
+    timerId = setInterval(draw, 12);
 });
