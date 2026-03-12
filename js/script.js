@@ -315,6 +315,14 @@ window.addEventListener("load", function () {
     const c = document.getElementById("splash-canvas");
     const ctx = c.getContext("2d");
 
+    /**
+     * draws a line at the specified coordinates
+     * 
+     * @param {number} x1 
+     * @param {number} x2 
+     * @param {number} y1 
+     * @param {number} y2 
+     */
     function drawLine(x1, x2, y1, y2) {
         ctx.strokeStyle = "rgb(157, 196, 219)";
         ctx.lineWidth = 5;
@@ -336,6 +344,9 @@ window.addEventListener("load", function () {
     let line2Done = false;
     let line3Done = false;
 
+    /**
+     * increments the lines until they reach a certain x/y coordinate
+     */
     function incrementLines() {
         if (verticalY1 <= 30) {
             verticalY1++;
@@ -362,6 +373,9 @@ window.addEventListener("load", function () {
         }
     }
 
+    /**
+     * clears and updates the canvas
+     */
     function update() {
         ctx.clearRect(0, 0, 300, 600);
         drawLine(100, 100, verticalY1, verticalY2);
@@ -370,6 +384,9 @@ window.addEventListener("load", function () {
         drawLine(rightHorizontalX1, rightHorizontalX2, 190, 190);
     }
 
+    /**
+     * draws the canvas
+     */
     function draw() {
         incrementLines();
         update();
@@ -382,6 +399,9 @@ window.addEventListener("load", function () {
     ctx.font = "bold 90px Arial";
     ctx.fillStyle = "rgb(157, 196, 219)";
 
+    /**
+     * draws the tic tac toe game once the lines are done moving
+     */
     function drawGame() {
         if (line1Done && line2Done && line3Done) {
             ctx.fillText("X", 120, 180);
