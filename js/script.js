@@ -127,7 +127,7 @@ window.addEventListener("load", function () {
                 this.gamesPlayed++;
                 scoreGamesPlayed.innerHTML = this.gamesPlayed;
                 scoreGamesWon.innerHTML = this.gamesWon;
-                gameOver();
+                setTimeout(() => gameOver(), 0);
                 return;
             }
 
@@ -136,7 +136,7 @@ window.addEventListener("load", function () {
                 this.gamesPlayed++;
                 scoreGamesPlayed.innerHTML = this.gamesPlayed;
                 scoreGamesLost.innerHTML = this.gamesLost;
-                gameOver();
+                setTimeout(() => gameOver(), 0);
                 return;
             }
 
@@ -153,7 +153,7 @@ window.addEventListener("load", function () {
                 boardFull = true;
                 this.gamesPlayed++;
                 scoreGamesPlayed.innerHTML = this.gamesPlayed;
-                gameOver();
+                setTimeout(() => gameOver(), 0);
             }
         }
     }
@@ -173,6 +173,8 @@ window.addEventListener("load", function () {
     const scoreGamesPlayed = document.getElementById("games-played");
     const scoreGamesWon = document.getElementById("games-won");
     const scoreGamesLost = document.getElementById("games-lost");
+    const emailValue = document.getElementById("email-hidden").value;
+    const quitLink = document.getElementById("quit");
     let xWin = false;
     let oWin = false;
     let boardFull = false;
@@ -192,6 +194,16 @@ window.addEventListener("load", function () {
      * creates a new tic tac toe game and resets the win/loss/tie variables 
      */
     function newGame() {
+        fetch(`play.php?email=${encodeURIComponent(emailValue)}&wins=${game.gamesWon}&losses=${game.gamesLost}&played=${game.gamesPlayed}`)
+            .then(response => response.text())
+            .then(data => {
+                console.log('PHP response:', data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        quitLink.href = `leaderboard.php?email=${encodeURIComponent(emailValue)}&wins=${game.gamesWon}&losses=${game.gamesLost}&played=${game.gamesPlayed}`;
+
         setTimeout(() => {
             game = new TicTacToe(["", "", "", "", "", "", "", "", ""], game.gamesPlayed, game.gamesWon, game.gamesLost, true);
             game.checkMoves();

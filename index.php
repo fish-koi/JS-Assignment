@@ -79,11 +79,11 @@ if ($email !== null  && $birthday !== null && $email !== false  && $birthday !==
                     $args = [$email, $birthday];
                     $result = $stmt->execute($args);
                     echo "<h3>Profile Created!</h3>";
-                    echo "<a href='play.php'>Play Tic Tac Toe</a>";
+                    echo "<a href='play.php?email=". urldecode($email) . "'>Play Tic Tac Toe</a>";
                 }
                 elseif ($row["birthday"] == $birthday) {
                     echo "<h3>Welcome Back!</h3>";
-                    echo "<a href='play.php'>Play Tic Tac Toe</a>";
+                    echo "<a href='play.php?email=". urldecode($email) . "'>Play Tic Tac Toe</a>";
                 }
                 else{
                     echo "<h3>Email taken.</h3>";

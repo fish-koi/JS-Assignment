@@ -3,6 +3,18 @@ Name: Angelica Epshtein
 File Created: 26/02/2026
 Description: This is the HTML for my JavaScript assignment
 -->
+<?php
+$email = $_GET['email'] ?? '';
+$wins = $_GET['wins'] ?? 0;
+$losses = $_GET['losses'] ?? 0;
+$played = $_GET['played'] ?? 0;
+if (isset($_GET['wins']) && isset($_GET['losses']) && isset($_GET['played'])) {
+    $wins = filter_input(INPUT_GET, "wins", FILTER_VALIDATE_INT);
+    $losses = filter_input(INPUT_GET, "losses", FILTER_VALIDATE_INT);
+    $played = filter_input(INPUT_GET, "played", FILTER_VALIDATE_INT);
+}
+?>
+
 <!doctype html>
 <html>
 
@@ -16,6 +28,7 @@ Description: This is the HTML for my JavaScript assignment
 
 <body>
     <div id="container">
+        <input type="hidden" id="email-hidden" value="<?= $email ?>">
         <div id="help-div">
             <h1>Help</h1>
             <h4>
@@ -84,12 +97,8 @@ Description: This is the HTML for my JavaScript assignment
                 <h3 id="games-lost">0</h3>
             </div>
         </div>
-
-        <!--
-        <input id="computer" type="button" value="Play Against Computer">
-        <input id="2-player" type="button" value="Play With Someone Else">
-        -->
         <input id="help" type="button" value="Help">
+        <a id="quit" href="leaderboard.php?email=<?= $email ?>&wins=<?= $wins ?>&losses=<?= $losses ?>&played=<?= $played ?>">Quit</a>
     </div>
 </body>
 
