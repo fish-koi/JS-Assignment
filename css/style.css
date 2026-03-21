@@ -165,3 +165,34 @@ p {
 #help-div input {
     background-color: rgb(157, 196, 219);
 }
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#email-feedback {
+    visibility: none;
+}
+
+h3 {
+    text-align: center;
+}
+
+a {
+    width: 50%;
+    align-self: center;
+    margin: 3%;
+    border: solid rgb(59, 73, 106) 1.5px;
+    background-color: rgb(189, 219, 240);
+    padding: 3%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 90%;
+    border-radius: 10px;
+    color: rgb(59, 73, 106);
+    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
+}
