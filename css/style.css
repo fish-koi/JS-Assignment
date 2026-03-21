@@ -196,3 +196,37 @@ a {
     text-decoration: none;
     text-align: center;
 }
+
+table {
+    background-color: rgb(189, 219, 240);
+    margin: 2%;
+    padding: 1%;
+    border-radius: 10px;
+}
+
+tr {
+    background-color: rgb(225, 244, 255);
+    margin: 2%;
+    border-radius: 10px;
+    text-align: center;
+}
+
+td {
+    background-color: rgb(225, 244, 255);
+}
+
+th:first-child {
+    border-top-left-radius: 10px;
+}
+
+th:last-child {
+    border-top-right-radius: 10px;
+}
+
+tr:last-child td:first-child {
+    border-bottom-left-radius: 10px;
+}
+
+tr:last-child td:last-child {
+    border-bottom-right-radius: 10px;
+}
