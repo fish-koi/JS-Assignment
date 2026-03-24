@@ -24,7 +24,7 @@ window.addEventListener("load", function () {
                 this.moves[index] = "X";
                 this.yourTurn = false;
                 this.checkWin();
-                localStorage["save"] = JSON.stringify(game);
+                //localStorage["save"] = JSON.stringify(game);
             }
         }
 
@@ -43,11 +43,11 @@ window.addEventListener("load", function () {
                     this.checkWin();
                     if (!xWin && !oWin) {
                         this.yourTurn = true;
-                        localStorage["save"] = JSON.stringify(game);
+                        //localStorage["save"] = JSON.stringify(game);
                     }
                 }, 1000);
             }
-            localStorage["save"] = JSON.stringify(game);
+            //localStorage["save"] = JSON.stringify(game);
         }
 
         /**
@@ -175,26 +175,46 @@ window.addEventListener("load", function () {
     const scoreGamesLost = document.getElementById("games-lost");
     const emailValue = document.getElementById("email-hidden").value;
     const quitLink = document.getElementById("quit");
+    let date = new Date().toISOString().slice(0, 10);
+    let time = new Date().toLocaleTimeString();
+    console.log(date);
+    console.log(time);
     let xWin = false;
     let oWin = false;
     let boardFull = false;
 
     //getting the game from localStorage if it exists
+    /* 
     if (localStorage["save"]) {
         let saveFile = JSON.parse(localStorage["save"]);
         game = new TicTacToe(saveFile.moves, saveFile.gamesPlayed, saveFile.gamesWon, saveFile.gamesLost, saveFile.yourTurn);
         game.checkMoves();
-
     }
     else {
         game = new TicTacToe(["", "", "", "", "", "", "", "", ""], 0, 0, 0, true);
     }
+    */
+    game = new TicTacToe(["", "", "", "", "", "", "", "", ""], 0, 0, 0, true);
+
+    fetch(`play.php?email=${encodeURIComponent(emailValue)}&wins=${game.gamesWon}&losses=${game.gamesLost}&played=${game.gamesPlayed}&date=${date}&time=${time}`)
+        .then(response => response.text())
+        .then(data => {
+            console.log('PHP response:', data);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    quitLink.href = `leaderboard.php?email=${encodeURIComponent(emailValue)}&wins=${game.gamesWon}&losses=${game.gamesLost}&played=${game.gamesPlayed}&date=${date}&time=${time}`;
+
+
 
     /**
      * creates a new tic tac toe game and resets the win/loss/tie variables 
      */
     function newGame() {
-        fetch(`play.php?email=${encodeURIComponent(emailValue)}&wins=${game.gamesWon}&losses=${game.gamesLost}&played=${game.gamesPlayed}`)
+        date = new Date().toISOString().slice(0, 10);
+        time = new Date().toLocaleTimeString();
+        fetch(`play.php?email=${encodeURIComponent(emailValue)}&wins=${game.gamesWon}&losses=${game.gamesLost}&played=${game.gamesPlayed}&date=${date}&time=${time}`)
             .then(response => response.text())
             .then(data => {
                 console.log('PHP response:', data);
@@ -202,7 +222,7 @@ window.addEventListener("load", function () {
             .catch(error => {
                 console.error('Error:', error);
             });
-        quitLink.href = `leaderboard.php?email=${encodeURIComponent(emailValue)}&wins=${game.gamesWon}&losses=${game.gamesLost}&played=${game.gamesPlayed}`;
+        quitLink.href = `leaderboard.php?email=${encodeURIComponent(emailValue)}&wins=${game.gamesWon}&losses=${game.gamesLost}&played=${game.gamesPlayed}&date=${date}&time=${time}`;
 
         setTimeout(() => {
             game = new TicTacToe(["", "", "", "", "", "", "", "", ""], game.gamesPlayed, game.gamesWon, game.gamesLost, true);
@@ -210,7 +230,7 @@ window.addEventListener("load", function () {
             xWin = false;
             oWin = false;
             boardFull = false;
-            localStorage["save"] = JSON.stringify(game);
+            //localStorage["save"] = JSON.stringify(game);
         }, 1500);
     }
 

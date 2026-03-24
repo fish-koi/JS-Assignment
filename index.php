@@ -28,8 +28,9 @@ if ($email !== null  && $birthday !== null && $email !== false  && $birthday !==
             const email = document.getElementById("email");
             const birthday = document.getElementById("birthday");
             const emailFeedback = document.getElementById("email-feedback");
+            const form = document.getElementById("form");
 
-            document.getElementById("form").addEventListener("submit", function() {
+            form.addEventListener("submit", function() {
                 let indexOne = -1;
                 let indexTwo = -1;
 

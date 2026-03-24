@@ -4,14 +4,18 @@ File Created: 26/02/2026
 Description: This is the HTML for my JavaScript assignment
 -->
 <?php
-$email = $_GET['email'] ?? '';
+$email = $_GET['email'] ?? 'NULL';
 $wins = $_GET['wins'] ?? 0;
 $losses = $_GET['losses'] ?? 0;
 $played = $_GET['played'] ?? 0;
-if (isset($_GET['wins']) && isset($_GET['losses']) && isset($_GET['played'])) {
+$date = $_GET['date'] ?? NULL;
+$time = $_GET['time'] ?? NULL;
+if (isset($_GET['wins']) && isset($_GET['losses']) && isset($_GET['played']) && isset($_GET['date']) && isset($_GET['time'])) {
     $wins = filter_input(INPUT_GET, "wins", FILTER_VALIDATE_INT);
     $losses = filter_input(INPUT_GET, "losses", FILTER_VALIDATE_INT);
     $played = filter_input(INPUT_GET, "played", FILTER_VALIDATE_INT);
+    $date = filter_input(INPUT_GET, "date", FILTER_SANITIZE_SPECIAL_CHARS);
+    $time = filter_input(INPUT_GET, "time", FILTER_SANITIZE_SPECIAL_CHARS);
 }
 ?>
 
@@ -28,6 +32,11 @@ if (isset($_GET['wins']) && isset($_GET['losses']) && isset($_GET['played'])) {
 
 <body>
     <div id="container">
+        <?php
+        if($email=="NULL"){
+            echo "<div id='error'><h3>Error: No email.</h3></div>";
+        }
+        ?>
         <input type="hidden" id="email-hidden" value="<?= $email ?>">
         <div id="help-div">
             <h1>Help</h1>
@@ -98,7 +107,7 @@ if (isset($_GET['wins']) && isset($_GET['losses']) && isset($_GET['played'])) {
             </div>
         </div>
         <input id="help" type="button" value="Help">
-        <a id="quit" href="leaderboard.php?email=<?= $email ?>&wins=<?= $wins ?>&losses=<?= $losses ?>&played=<?= $played ?>">Quit</a>
+        <a id="quit">Quit</a>
     </div>
 </body>
 
