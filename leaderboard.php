@@ -72,7 +72,7 @@ try {
             </tbody>
         </table>
         <h3>Overall Stats</h3>
-        <table>
+        <table id="overall-stats">
             <thead>
                 <tr>
                     <th>User</th>

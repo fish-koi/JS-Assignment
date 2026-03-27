@@ -245,3 +245,7 @@ tr:last-child td:last-child {
     align-items: center;
     display: flex;
 }
+
+#overall-stats{
+    font-size: 70%;
+}

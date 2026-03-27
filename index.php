@@ -30,42 +30,49 @@ if ($email !== null  && $birthday !== null && $email !== false  && $birthday !==
             const emailFeedback = document.getElementById("email-feedback");
             const form = document.getElementById("form");
 
-            form.addEventListener("submit", function() {
-                let indexOne = -1;
-                let indexTwo = -1;
+            if (form != null) {
+                form.addEventListener("submit", function() {
+                    let indexOne = -1;
+                    let indexTwo = -1;
 
-                for (let i = 0; i < email.value.length; i++) {
-                    if (email.value[i] == "@") {
-                        indexOne = i;
+                    for (let i = 0; i < email.value.length; i++) {
+                        if (email.value[i] == "@") {
+                            indexOne = i;
+                        }
+                        if (email.value[i] == ".") {
+                            indexTwo = i;
+                        }
                     }
-                    if (email.value[i] == ".") {
-                        indexTwo = i;
-                    }
-                }
 
-                if (!(indexOne < indexTwo && indexOne !== -1 && indexTwo !== -1)) {
-                    emailFeedback.visibility = "visible";
-                    emailFeedback.innerHTML = "Invalid email, please try again.";
-                    event.preventDefault();
-                }
-            });
+                    if (!(indexOne < indexTwo && indexOne !== -1 && indexTwo !== -1)) {
+                        emailFeedback.visibility = "visible";
+                        emailFeedback.innerHTML = "Invalid email, please try again.";
+                        event.preventDefault();
+                    }
+                });
+            }
         });
     </script>
 </head>
 
 <body>
     <div id="container">
-        <div id="header">
-            <h1>Login</h1>
-        </div>
-        <form id="form" name="form" action="index.php">
-            <input id="email" type="email" name="email" placeholder="email" required>
-            <p id="email-feedback"></p>
-            <input id="birthday" type="date" name="birthday" required>
-            <input type="submit">
-        </form>
+        <?php
+        if (!isset($email)) {
+        ?>
+            <div id="header">
+                <h1>Login</h1>
+            </div>
+            <form id="form" name="form" action="index.php">
+                <input id="email" type="email" name="email" placeholder="email" required>
+                <p id="email-feedback"></p>
+                <input id="birthday" type="date" name="birthday" required>
+                <input type="submit">
+            </form>
 
         <?php
+        }
+
         if ($paramsok) {
             $error = false;
             try {
@@ -80,13 +87,11 @@ if ($email !== null  && $birthday !== null && $email !== false  && $birthday !==
                     $args = [$email, $birthday];
                     $result = $stmt->execute($args);
                     echo "<h3>Profile Created!</h3>";
-                    echo "<a href='play.php?email=". urldecode($email) . "'>Play Tic Tac Toe</a>";
-                }
-                elseif ($row["birthday"] == $birthday) {
+                    echo "<a href='play.php?email=" . urldecode($email) . "'>Play Tic Tac Toe</a>";
+                } elseif ($row["birthday"] == $birthday) {
                     echo "<h3>Welcome Back!</h3>";
-                    echo "<a href='play.php?email=". urldecode($email) . "'>Play Tic Tac Toe</a>";
-                }
-                else{
+                    echo "<a href='play.php?email=" . urldecode($email) . "'>Play Tic Tac Toe</a>";
+                } else {
                     echo "<h3>Email taken.</h3>";
                     echo "<a href='index.php'>Try Again</a>";
                 }
